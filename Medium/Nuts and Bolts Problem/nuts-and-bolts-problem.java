@@ -43,25 +43,7 @@ public class Main {
 class Solution {
     void matchPairs(int n, char nuts[], char bolts[]) {
         // code here
-        char arr[]={'!','#','$','%','&','*','?','@','^'};
-        String str1="";
-        String str2="";
-
-        //Storing all the elements in a String
-        for(int i=0;i<n;i++){
-            str1+=nuts[i];
-            str2+=bolts[i];
-        }
-        int j=0;
-        for(char i : arr){
-            if(str1.indexOf(i)!=-1){
-                nuts[j]=i;
-            }
-            if(str2.indexOf(i)!=-1){
-                bolts[j]=i;
-                j++;
-            }
-        }
-        
+        Arrays.sort(nuts);
+        Arrays.sort(bolts);
     }
 }
