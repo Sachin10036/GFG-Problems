@@ -16,7 +16,7 @@ class GFG {
                     M[i][j] = sc.nextInt();
                 }
             }
-            System.out.println(new Solution().celebrity(M, N));
+            System.out.println(new Solution().celebrity(M));
             t--;
         }
     }
@@ -28,15 +28,16 @@ class GFG {
 
 class Solution {
     // Function to find if there is a celebrity in the party or not.
-    int celebrity(int M[][], int n) {
+    public int celebrity(int mat[][]) {
         // code here
+        int n = mat.length;
         int top = 0;
         int down = n-1;
         while(top < down){
-            if(M[top][down] == 1){
+            if(mat[top][down] == 1){
                 top++;
             }
-            else if(M[down][top] == 1){
+            else if(mat[down][top] == 1){
                 down--;
             }
             else{
@@ -47,7 +48,7 @@ class Solution {
         if(top > down) return -1;
         for(int i=0; i<n; i++){
             if(top == i) continue;
-            if(M[top][i] == 0 && M[i][top] == 1){
+            if(mat[top][i] == 0 && mat[i][top] == 1){
                 continue;
             }
             else{
