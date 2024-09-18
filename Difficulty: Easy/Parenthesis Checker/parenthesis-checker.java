@@ -32,27 +32,26 @@ class Driverclass
 
 
 
-class Solution
-{
-    //Function to check if brackets are balanced or not.
-    static boolean ispar(String x)
-    {
-        // add your code here
+class Solution{
+    static boolean ispar(String x){
         Stack<Character> st = new Stack<>();
-        for(int i=0; i<x.length(); i++){
-            char el = x.charAt(i);
-            if(el =='(' || el=='[' || el=='{'){
-                st.push(el);
+        for(char ch : x.toCharArray()){
+            if(ch == '{' || ch == '(' || ch == '['){
+                st.push(ch);
             }
             else{
-                if(st.isEmpty()){
+                if(ch == '}') ch = '{';
+                if(ch == ')') ch = '(';
+                if(ch == ']') ch = '[';
+                if(!st.isEmpty() && st.peek() != ch){
                     return false;
                 }
-                char ch = st.pop();
-                if((el==')' && ch=='(') || (el==']' && ch=='[') || (el=='}' && ch=='{')){
-                    continue;
+                else if(st.isEmpty()){
+                    return false;
                 }
-                else return false;
+                else{
+                    st.pop();
+                }
             }
         }
         return st.isEmpty();
