@@ -9,25 +9,24 @@ import java.util.*;
 // User function Template for Java
 
 class Solution {
-    public int minimizeCost(int arr[], int k) {
-        // code here
+    public int minimizeCost(int k, int arr[]) {
         int n = arr.length;
-        int dp[] = new int[n];
+        int[] dp = new int[n];
         dp[0] = 0;
+        
         for(int i=1; i<n; i++){
-            int minCost = Integer.MAX_VALUE;
-            for(int j=1; j<= k; j++){
-                if((i-j) >= 0){
-                    int jump = dp[i-j] + Math.abs(arr[i] - arr[i-j]);
-                    minCost = Math.min(minCost, jump);
+            dp[i] = Integer.MAX_VALUE;
+            
+            for(int j=1; j<=k; j++){
+                if(i-j>=0){
+                    dp[i] = Math.min(dp[i], dp[i-j] + Math.abs(arr[i]-arr[i-j]));
                 }
             }
-            dp[i] = minCost;
         }
+        
         return dp[n-1];
     }
 }
-
 
 //{ Driver Code Starts.
 
@@ -52,7 +51,7 @@ class GFG {
             int idx = 0;
             for (int i : array) arr[idx++] = i;
             Solution obj = new Solution();
-            int res = obj.minimizeCost(arr, k);
+            int res = obj.minimizeCost(k, arr);
 
             System.out.println(res);
         }
