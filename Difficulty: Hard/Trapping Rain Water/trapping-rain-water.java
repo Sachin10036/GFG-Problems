@@ -1,67 +1,39 @@
 //{ Driver Code Starts
 import java.io.*;
 import java.util.*;
-import java.lang.*;
 
-
-class Array {
-
-	public static void main (String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int t = Integer.parseInt(br.readLine().trim()); //Inputting the testcases
-		while(t-->0){
-		  
-		    //size of array
-		    int n = Integer.parseInt(br.readLine().trim());
-		    int arr[] = new int[n];
-		    String inputLine[] = br.readLine().trim().split(" ");
-		    
-		    //adding elements to the array
-		    for(int i=0; i<n; i++){
-		        arr[i] = Integer.parseInt(inputLine[i]);
-		    }
-		    
-		    Solution obj = new Solution();
-		    
-		    //calling trappingWater() function
-		    System.out.println(obj.trappingWater(arr, n));
-		}
-	}
+class Sorting {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+        for (int g = 0; g < t; g++) {
+            String[] str = (br.readLine()).trim().split(" ");
+            int arr[] = new int[str.length];
+            for (int i = 0; i < str.length; i++) arr[i] = Integer.parseInt(str[i]);
+            System.out.println(new Solution().maxWater(arr));
+            System.out.println("~");
+        }
+    }
 }
-
-
 // } Driver Code Ends
 
 
-class Solution{
-    
-    // arr: input array
-    // n: size of array
-    // Function to find the trapped water between the blocks.
-    static long trappingWater(int arr[], int n) { 
-        // Your code here
-        int left = 0, right = n - 1;
-        long res = 0;
-        int maxLeft = 0, maxRight = 0;
-        while (left <= right) {
-            if (arr[left] <= arr[right]) {
-                if (arr[left] >= maxLeft) {
-                    maxLeft = arr[left];
-                } else {
-                    res += maxLeft - arr[left];
-                }
-                left++;
+class Solution {
+    public int maxWater(int arr[]) {
+        int totalWater = 0;
+        int i = 0, j = arr.length - 1;
+        int lmax = 0, rmax = 0;
+        while (i <= j) {
+            if (arr[i] <= arr[j]) {
+                lmax = Math.max(lmax, arr[i]);
+                totalWater += lmax - arr[i];
+                i++;
             } else {
-                if (arr[right] >= maxRight) {
-                    maxRight = arr[right];
-                } else {
-                    res += maxRight - arr[right];
-                }
-                right--;
+                rmax = Math.max(rmax, arr[j]);
+                totalWater += rmax - arr[j];
+                j--;
             }
         }
-        return res;
-    } 
+        return totalWater;
+    }
 }
-
-
